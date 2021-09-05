@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.clock {
+				width: 300px;
+				height: 300px;
+				background-color: lightgray;
+				border-radius: 50%;
+				border: 10px solid darkgray;
+				margin: 0 auto;
+				position: relative;
+			}
+
+			.mark {
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				background-color: darkgray;
+
+				position: absolute;
+			}
+
+			.twe {
+				left: 145px;
+				top: 10px;
+			}
+
+			.thr {
+				right: 10px;
+				top: 145px;
+			}
+
+			.six {
+				bottom: 10px;
+				left: 145px;
+			}
+
+			.test1 {
+
+				width: 300px;
+				height: 1px;
+				background-color: #FF0000;
+				position: absolute;
+				top: 150px;
+				left: 0px;
+			}
+
+			.test2 {
+
+				width: 1px;
+				height: 300px;
+				background-color: #FF0000;
+				position: absolute;
+				top: 0px;
+				left: 150px;
+			}
+
+			.nine {
+				left: 10px;
+				top: 145px;
+			}
+
+			.center {
+				width: 20px;
+				height: 20px;
+				border-radius: 50%;
+				background-color: darkgray;
+				left: 140px;
+				top: 140px;
+				position: absolute;
+			}
+
+			.hand {
+				position: absolute;
+				left: 150px;
+				border-radius: 0 50% 50% 0;
+				transform-origin: 0;
+			}
+
+			.hour {
+				width: 100px;
+				height: 10px;
+				background-color: red;
+				border-radius: 0 50% 50% 0;
+				top: 145px;
+			}
+
+			.min {
+				width: 115px;
+				height: 8px;
+				background-color: blue;
+				border-radius: 0 50% 50% 0;
+				top: 146px;
+			}
+
+			.sec {
+				width: 140px;
+				height: 6px;
+				background-color: darkgray;
+				border-radius: 0 50% 50% 0;
+				top: 147px;
+			}
+
+			.weekday {
+				width: 50px;
+				height: 20px;
+				position: absolute;
+				right: 20px;
+				top: 140px;
+			}
+
+			.weekday span {
+				margin: 3px;
+				background-color: white;
+			}
+
+			.time {
+				width: 66px;
+				height: 20px;
+				bottom: 25px;
+				left: 117px;
+				background-color: white;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="clock">
+			<div class="mark twe"></div>
+			<div class="mark thr"></div>
+			<div class="mark six"></div>
+			<div class="mark nine"></div>
+			<div class="hand hour" id="h"></div>
+			<div class="hand min" id="m"></div>
+			<div class="hand sec" id="s"></div>
+			<div class="weekday"><span id="day">05</span><span id="week">日</span></div>
+			<div class="time" id="time">23:59:59</div>
+			<div class="center"></div>
+			<div class="test1"></div>
+			<div class="test2"></div>
+		</div>
+		<script type="text/javascript">
+			var h = document.getElementById("h");
+			var m = document.getElementById("m");
+			var s = document.getElementById("s");
+			
+			var dayspan = document.getElementById("day");
+			var weekspan = document.getElementById("week");
+
+			var time = document.getElementById("time");
+
+			var clock = function() {
+				var timeNow = new Date();
+				var dayNow = timeNow.getDate();
+				dayspan.innerHTML = format(dayNow);
+
+				var weekNow = timeNow.getDay();
+				var weeks = ["日", "一", "二", "三", "四", "五", "六"]
+				weekspan.innerHTML = weeks[weekNow];
+
+				var hNow = timeNow.getHours();
+				var mNow = timeNow.getMinutes();
+				var sNow = timeNow.getSeconds();
+				time.innerHTML = format(hNow) + ":" + format(mNow) + ":" + format(sNow);
+
+				var sDegrees = sNow * 6 - 90;
+				s.style.transform = "rotate(" + sDegrees + "deg)";
+
+				var mDegrees = mNow * 6 + sNow / 10 - 90;
+				m.style.transform = "rotate(" + mDegrees + "deg)";
+
+				var hDegrees = hNow * 30 + (mNow / 2) - 90;
+				h.style.transform = "rotate(" + hDegrees + "deg)";
+			}
+			clock();
+			setInterval(clock, 1000);
+
+			function format(n) {
+				return n > 9 ? n : ('0' + n)
+			}
+		</script>
+	</body>
+</html>

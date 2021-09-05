@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#mydiv {
+				width: 80px;
+				height: 80px;
+				border: 2px solid red;
+				border-radius: 50%;
+				text-align: center;
+				line-height: 80px;
+
+				position: fixed;
+				right: 10px;
+				bottom: 10px;
+				
+				display: none;
+			}
+
+			.text:nth-child(even) {
+				height: 100px;
+				background-color: lightyellow;
+			}
+
+			.text:nth-child(odd) {
+				height: 70px;
+				background-color: skyblue;
+			}
+
+			/* body{
+				height: 2000px;
+			} */
+		</style>
+	</head>
+	<body>
+		<div id="mydiv">返回顶部</div>
+		<div class="text">1</div>
+		<div class="text">2</div>
+		<div class="text">3</div>
+		<div class="text">4</div>
+		<div class="text">5</div>
+		<div class="text">6</div>
+		<div class="text">7</div>
+		<div class="text">8</div>
+		<div class="text">9</div>
+		<div class="text">10</div>
+		<div class="text">1</div>
+		<div class="text">2</div>
+		<div class="text">3</div>
+		<div class="text">4</div>
+		<div class="text">5</div>
+		<div class="text">6</div>
+		<div class="text">7</div>
+		<div class="text">8</div>
+		<div class="text">9</div>
+		<div class="text">10</div>
+		<div class="text">1</div>
+		<div class="text">2</div>
+		<div class="text">3</div>
+		<div class="text">4</div>
+		<div class="text">5</div>
+		<div class="text">6</div>
+		<div class="text">7</div>
+		<div class="text">8</div>
+		<div class="text">9</div>
+		<div class="text">10</div>
+		<div class="text">1</div>
+		<div class="text">2</div>
+		<div class="text">3</div>
+		<div class="text">4</div>
+		<div class="text">5</div>
+		<div class="text">6</div>
+		<div class="text">7</div>
+		<div class="text">8</div>
+		<div class="text">9</div>
+		<div class="text">10</div>
+		<div class="text">1</div>
+		<div class="text">2</div>
+		<div class="text">3</div>
+		<div class="text">4</div>
+		<div class="text">5</div>
+		<div class="text">6</div>
+		<div class="text">7</div>
+		<div class="text">8</div>
+		<div class="text">9</div>
+		<div class="text">10</div>
+	</body>
+	<script type="text/javascript">
+		var mydiv = document.getElementById("mydiv");
+
+		mydiv.onclick = function() {
+			document.documentElement.scrollTop = 0;
+		}
+		window.onscroll = function(){
+			if(document.documentElement.scrollTop>300){
+				mydiv.style.display = "block";
+			}else{
+				mydiv.style.display = "none";
+			}
+		}
+	</script>
+
+</html>

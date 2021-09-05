@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				margin: 0;
+			}
+
+			#box {
+				width: 600px;
+				margin: 50px auto;
+				border: 1px solid blue;
+			}
+
+			#box header {
+				height: 50px;
+				line-height: 50px;
+				text-align: center;
+				color: white;
+				background-color: #17a;
+				padding: 0 10px;
+			}
+
+			#box header span {
+				cursor: pointer;
+			}
+
+			#box header span.fl {
+				float: left;
+			}
+
+			#box header span.fr {
+				float: right;
+			}
+
+			#box header div {
+				font-size: 30px;
+			}
+
+			#box table {
+				border-right: 1px solid #ccc;
+				border-bottom: 1px solid #ccc;
+			}
+
+			#box table th,
+			#box table td {
+				border-left: 1px solid #ccc;
+				border-top: 1px solid #ccc;
+				text-align: center;
+				height: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<!-- <header>
+				<span class="fl">上个月</span>
+				<span class="fr">下个月</span>
+				<div>2021年10月</div>
+
+			</header>
+			<table width="100%" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th class="red">周日</th>
+						<th class="red">周一</th>
+						<th class="red">周二</th>
+						<th class="red">周三</th>
+						<th class="red">周四</th>
+						<th class="red">周五</th>
+						<th class="red">周六</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+					</tr>
+				</tbody>
+			</table> -->
+		</div>
+
+
+	</body>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js" type="text/javascript" charset="UTF-8"></script>
+	<script type="text/javascript">
+		$(function() {
+
+			var defaultDate = new Date();
+			var box = $("#box");
+			var yearMonthTitleDivs = null;
+			var preMonthSpan = null;
+			var nextMonthSpan = null;
+			var tBody = null;
+			var allTd = [];
+
+			//创建静态布局
+			creat();
+
+			//显示当前日期
+			showDate();
+
+			$('#box span').click(function() {
+				var year = defaultDate.getFullYear();
+				var month = defaultDate.getMonth();
+				if ($(this).index() == 0) {
+					month--;
+				} else {
+					month++;
+				}
+				defaultDate = new Date(year, month);
+				showDate();
+			});
+
+
+			function showDate() {
+				var year = defaultDate.getFullYear();
+				var month = defaultDate.getMonth() + 1;
+				yearMonthTitleDivs.text(year + "年" + month + "月");
+				//1号星期几
+				var week = new Date(year, month - 1, 1).getDay();
+				//本月一共多少天
+				var days = new Date(year, month, 0).getDate();
+				var today = new Date().getDate();
+				var n = 1;
+				for (var i = 0; i < allTd.length; i++) {
+					allTd[i].empty();
+					if (i >= week && n <= days) {
+						allTd[i].text(n);
+						n++;
+					}
+				};
+				if (allTd[28].text() === '') {
+					allTd[28].parent().hide();
+					allTd[35].parent().hide();
+				} else if (allTd[35].text() === '') {
+					allTd[35].parent().hide();
+				} else {
+					allTd[28].parent().show();
+					allTd[35].parent().show();
+				}
+			}
+
+			function creat() {
+				var header = $(`
+			<header>
+				<span class="fl">上个月</span>
+				<span class="fr">下个月</span>
+				<div>2021年10月</div>
+			</header>
+			`);
+				box.append(header);
+				yearMonthTitleDivs = header.find('div');
+				preMonthSpan = header.find('.fl');
+				nextMonthSpan = header.find('.fr');
+
+				var table = $(`<table width="100%" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th class="red">周日</th>
+						<th class="red">周一</th>
+						<th class="red">周二</th>
+						<th class="red">周三</th>
+						<th class="red">周四</th>
+						<th class="red">周五</th>
+						<th class="red">周六</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+				</table>
+				`);
+				box.append(table);
+
+				tBody = table.find('tbody');
+				for (var i = 0; i < 6; i++) {
+					var tr = $("<tr></tr>");
+					for (var k = 0; k < 7; k++) {
+						var td = $("<td></td>");
+						tr.append(td);
+						allTd.push(td);
+					}
+					tBody.append(tr);
+				}
+			}
+
+
+		});
+	</script>
+</html>

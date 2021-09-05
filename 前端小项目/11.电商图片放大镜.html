@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#box {
+				width: 1200px;
+				margin: 0 auto;
+			}
+
+			#smallDiv {
+				float: left;
+				width: 450px;
+				height: 450px;
+				border: 1px solid red;
+
+				margin-right: 50px;
+				position: relative;
+				
+			}
+
+			#bigDiv {
+				width: 550px;
+				height: 550px;
+				border: 1px solid red;
+
+				overflow: hidden;
+				position: relative;
+				
+				display: none;
+
+			}
+
+			#move {
+				/**
+				 * 
+				 W/小div宽 = 大div宽 / 大图宽
+				    w = 550/800*450 = 379.6875
+				 */
+				width: 310px;
+				height: 310px;
+				background-color: aqua;
+				position: absolute;
+				left: 0;
+				top: 0;
+				opacity: 0.6;
+				display: none;
+			}
+
+			#bigImg {
+				position: absolute;
+
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="smallDiv">
+				<img src="京东手机.jpg" id="smallImg" />
+				<div id="move"></div>
+			</div>
+			<div id="bigDiv">
+				<img src="京东手机2.jpg" alt="" id="bigImg" />
+			</div>
+			</dialog>
+
+			<script type="text/javascript">
+				var sdiv = document.getElementById("smallDiv");
+				var bdiv = document.getElementById("bigDiv");
+				var simg = document.getElementById("smallImg");
+				var bimg = document.getElementById("bigImg");
+				var move = document.getElementById("move");
+
+				sdiv.onmousemove = function(e) {
+					var x = e.pageX - sdiv.offsetLeft - move.offsetWidth / 2;
+					var y = e.pageY - sdiv.offsetTop - move.offsetHeight / 2;
+					if (x < 0) {
+						x = 0;
+					} else if (x > sdiv.offsetWidth - move.offsetWidth) {
+						x = sdiv.offsetWidth - move.offsetWidth;
+					}
+					if (y < 0) {
+						y = 0;
+					} else if (y > sdiv.offsetHeight - move.offsetHeight) {
+						y = sdiv.offsetHeight - move.offsetHeight;
+					}
+					move.style.left = x + "px";
+					move.style.top = y + "px";
+
+					bimg.style.left = -x * (bimg.offsetWidth / simg.offsetWidth) + "px"
+					bimg.style.top = -y * (bimg.offsetHeight / simg.offsetHeight) + "px"
+				}
+				
+				sdiv.onmouseover = function() {
+					bdiv.style.display = "block";
+					move.style.display = "block";
+				}
+				sdiv.onmouseleave = function() {
+					bdiv.style.display = "none";
+					move.style.display = "none";
+				}
+			</script>
+	</body>
+
+</html>

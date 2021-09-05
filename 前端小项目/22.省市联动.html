@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<p align="center">
+			省：<select name="" id="sel1">
+				<option value="">请选择</option>
+			</select>
+			市：
+			<select id="sel2"></select>
+			区：<select id="sel3"></select>
+		</p>
+		你选择的地址是：<h1 id="address">您当前未选择</h1>
+	</body>
+	<script src="city.js" type="text/javascript" charset="UTF-8"></script>
+	<script type="text/javascript">
+		var sel1 = document.getElementById("sel1");
+		var sel2 = document.getElementById("sel2");
+		var sel3 = document.getElementById("sel3");
+		var h1 = document.getElementById("address");
+
+		var cityArr = [];
+		var arearArr = [];
+
+		// citys.forEach(v=>{
+		// 	var option = new Option(v.name);
+		// 	sel1.options.add(option);
+		// })
+		for (var i = 0; i < citys.length; i++) {
+			var option = new Option(citys[i].name);
+			sel1.options.add(option);
+		}
+		var sel1Index=0;
+		sel1.onchange = function() {
+			sel1Index = this.selectedIndex - 1;
+			sel2.options.length = 0;
+			if (sel1Index != -1) {
+				cityArr = citys[sel1Index].city;
+				for (var i = 0; i < cityArr.length; i++) {
+					var option = new Option(cityArr[i].name);
+					sel2.options.add(option);
+				}
+
+				arearArr = cityArr[0].area;
+				sel3.options.length = 0;
+				for (var i = 0; i < arearArr.length; i++) {
+					var option = new Option(arearArr[i]);
+					sel3.options.add(option);
+				}
+				h1.innerText = citys[sel1Index].name + cityArr[0].name + arearArr[0];
+			} else {
+				h1.innerText = "您当前未选择";
+			}
+		}
+		var sel2Index=0;
+		sel2.onchange = function() {
+			sel2Index = this.selectedIndex;
+
+
+			arearArr = cityArr[sel2Index].area;
+			sel3.options.length = 0;
+			for (var i = 0; i < arearArr.length; i++) {
+				var option = new Option(arearArr[i]);
+				sel3.options.add(option);
+			}
+			h1.innerText = citys[sel1Index].name + cityArr[sel2Index].name + arearArr[0];
+		}
+		var sel3Index=0;
+		sel3.onchange = function() {
+			sel3Index = this.selectedIndex;
+			h1.innerHTML = citys[sel1Index].name + cityArr[sel2Index].name + arearArr[sel3Index];
+		}
+	</script>
+</html>

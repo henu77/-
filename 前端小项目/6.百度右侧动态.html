@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+
+			ul {
+				position: fixed;
+				left: 50%;
+				margin-left: 502px;
+				bottom: 20px;
+				/* background-color: red; */
+				list-style: none;
+			}
+
+			li {
+				width: 48px;
+				height: 48px;
+				background-image: url(百度2.png);
+				margin-bottom: 3px;
+				position: relative;
+				
+				border-radius: 3px;
+				overflow: hidden;
+			}
+
+			.report {
+				background-image: url(百度1.png);
+				height: 92px;
+				background-size: cover;
+			}
+
+			.favorited {
+				background-position-y: -51px;
+			}
+
+			.search {
+				background-position-y: -204px;
+			}
+
+			.feedback {
+				background-position-y: -256px;
+			}
+
+			li:last-child {
+				margin-bottom: 0;
+			}
+			a{
+				border-radius: 3px;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				line-height: 48px;
+				font-size: 12px;
+				font-weight: 700;
+				
+				color: #ffffff;
+				text-decoration: none;
+				background-color: #18448e;
+				text-align: center;
+				
+				transform-origin: -50%;
+				transform: rotateZ(90deg);
+				transition: transform .3s;
+			}
+			.report a{
+				transform-origin: -100% 50%;
+				height: 92px;
+				line-height: 92px;
+			}
+			li:hover a{
+				transform: rotateZ(0deg);
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li class="report">
+				<a href="#">举报</a>
+			</li>
+			<li class="qr-code">
+				<a href="#">二维码</a>
+			</li>
+			<li class="favorited">
+				<a href="#">收藏本站</a>
+			</li>
+			<li class="search">
+				<a href="#">搜索</a>
+			</li>
+			<li class="feedback">
+				<a href="#">用户反馈</a>
+			</li>
+		</ul>
+	</body>
+</html>

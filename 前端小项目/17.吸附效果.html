@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#box {
+				width: 200px;
+				height: 200px;
+				background-color: greenyellow;
+				margin: 200px auto;
+
+			}
+
+			#move {
+				position: absolute;
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				left: 0;
+				top: 0;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				var box = document.getElementById("box");
+				var move = document.getElementById("move");
+
+				move.onmousedown = function(ev) {
+					ev = ev || event;
+					var t = ev.clientY - move.offsetTop;
+					var l = ev.clientX - move.offsetLeft;
+
+					document.onmousemove = function(ev) {
+						ev = ev || event;
+						var left = ev.clientX - l;
+						var top = ev.clientY - t;
+
+						move.style.left = left + "px";
+						move.style.top = top + "px";
+						if (left + move.offsetWidth + 50 >= box.offsetLeft &&
+							top+move.offsetHeight > box.offsetTop &&
+							top < box.offsetTop + box.offsetHeight
+						) {
+							left = box.offsetLeft - move.offsetWidth;
+							move.style.left = left + "px";
+						}
+					}
+
+				}
+
+				move.onmouseup = document.onmouseup = function() {
+					document.onmousemove = null;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box"></div>
+		<div id="move"></div>
+	</body>
+</html>

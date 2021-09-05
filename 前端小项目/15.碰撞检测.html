@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#box {
+				width: 200px;
+				height: 200px;
+				background-color: gainsboro;
+				position: absolute;
+				left: 50%;
+				margin-left: -100px;
+				top: 50%;
+				margin-top: -100px;
+			}
+
+			#move {
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				position: absolute;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				var box = document.getElementById("box");
+				var move = document.getElementById("move");
+
+				move.onmousedown = function(ev) {
+					ev = ev || event;
+					var t = ev.clientY - move.offsetTop;
+					var l = ev.clientX - move.offsetLeft;
+					document.onmousemove = function(ev) {
+						ev = ev || event;
+						var x = ev.clientX - l;
+						var y = ev.clientY - t;
+
+						move.style.left = x + "px";
+						move.style.top = y + "px";
+
+						//碰撞检测
+						if (x + move.offsetWidth < box.offsetLeft ||
+							x > box.offsetLeft + box.offsetWidth ||
+							y + move.offsetHeight < box.offsetTop ||
+							y > box.offsetTop + box.offsetHeight
+						){
+								console.log("没碰到");
+								box.style.background = 'gainsboro';
+						}else{
+							console.log("碰到了");
+							box.style.background = 'orange'; 
+						}
+					}
+
+				}
+				move.onmouseup = function() {
+					document.onmousemove = null;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box"></div>
+		<div id="move"></div>
+	</body>
+</html>

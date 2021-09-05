@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				perspective: 1000px;
+			}
+
+			#box {
+				position: relative;
+				width: 100px;
+				height: 200px;
+				margin: 100px auto;
+				transform-style: preserve-3d ;
+				animation: myrotate 10s linear infinite;
+			}
+
+			@keyframes myrotate {
+				from {
+					transform: rotateY(0deg);
+				}
+
+				to {
+					transform: rotateY(360deg);
+				}
+			}
+
+			.item {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100px;
+				height: 200px;
+
+			}
+
+			.item01 {
+				transform: translateZ(300px);
+			}
+
+			.item02 {
+				transform: rotateY(36deg) translateZ(300px);
+			}
+
+			.item03 {
+				transform: rotateY(72deg) translateZ(300px);
+			}
+
+			.item04 {
+				transform: rotateY(108deg) translateZ(300px);
+			}
+
+			.item05 {
+				transform: rotateY(144deg) translateZ(300px);
+			}
+
+			.item06 {
+				transform: rotateY(180deg) translateZ(300px);
+			}
+
+			.item07 {
+				transform: rotateY(216deg) translateZ(300px);
+			}
+
+			.item08 {
+				transform: rotateY(252deg) translateZ(300px);
+			}
+
+			.item09 {
+				transform: rotateY(288deg) translateZ(300px);
+			}
+
+			.item10 {
+				transform: rotateY(324deg) translateZ(300px);
+			}
+
+			img {
+				width: 100%;
+				border: 2px solid aquamarine;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div class="item item01">
+				<img src="风景.jpg">
+			</div>
+			<div class="item item02">
+				<img src="风景.jpg">
+			</div>
+			<div class="item item03">
+				<img src="风景.jpg">
+			</div>
+			<div class="item item04">
+				<img src="风景.jpg">
+			</div>
+			<div class="item item05">
+				<img src="风景.jpg">
+			</div>
+			<div class="item item06">
+				<img src="风景.jpg">
+			</div>
+			<div class="item item07">
+				<img src="风景.jpg">
+			</div>
+			<div class="item item08">
+				<img src="风景.jpg">
+			</div>
+			<div class="item item09">
+				<img src="风景.jpg">
+			</div>
+			<div class="item item10">
+				<img src="风景.jpg">
+			</div>
+		</div>
+	</body>
+</html>
